@@ -1,6 +1,9 @@
 package task4_pizzas;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -48,6 +51,21 @@ public class DataHandlerTask4 {
     public void loadData() {
         try {
             // TODO
+
+            BufferedReader reader =
+                    new BufferedReader
+                            (new FileReader("src/task4_pizzas/pizzas.txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(MAIN_SEPARATOR);
+                String[] toppings = parts[1].split(SECONDARY_SEPARATOR);
+                List<String> toppingThing = new ArrayList<>();
+
+                Collections.addAll(toppingThing, toppings);
+
+                Pizza newPizza = new Pizza(parts[0], toppingThing, Integer.parseInt(parts[2]), PizzaSize.sizeConverter(parts[3]));
+                pizzas.add(newPizza);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

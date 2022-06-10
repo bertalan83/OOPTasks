@@ -1,5 +1,7 @@
 package task3_customers;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -31,8 +33,13 @@ public class CustomerTask {
      * Számold meg!
      */
     public int countCountries() {
-        // TODO
-        return -1;
+
+        Set<String> different = new HashSet<>();
+
+        for (Customer sthing : dataHandler.getCustomers()) {
+            different.add(sthing.getCountry());
+        }
+        return different.size();
     }
 
     /**
@@ -41,8 +48,15 @@ public class CustomerTask {
      * és gyűjtsd össze a nevüket!
      */
     public List<String> collectCustomerNamesByCity(String city) {
-        // TODO
-        return null;
+
+        List<String> themPpl = new ArrayList<>();
+
+        for (Customer sthing : dataHandler.getCustomers()) {
+            if (sthing.getCity().equalsIgnoreCase(city)) {
+                themPpl.add(sthing.getName());
+            }
+        }
+        return themPpl;
     }
 
     /**
@@ -59,8 +73,17 @@ public class CustomerTask {
      *          B-1180 (Belgium)
      */
     public Set<String> findCountriesWithNonDigitalPostalCode() {
-        // TODO
-        return null;
+
+        Set<String> themCountries = new HashSet<>();
+
+        for (Customer sthing : dataHandler.getCustomers()) {
+            for (int i = 0; i < sthing.getPostCode().length(); i++) {
+                if (Character.isLetter(sthing.getPostCode().charAt(i))) {
+                    themCountries.add(sthing.getCountry());
+                }
+            }
+        }
+        return themCountries;
     }
 
 }

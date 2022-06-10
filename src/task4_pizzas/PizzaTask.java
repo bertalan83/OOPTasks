@@ -1,5 +1,8 @@
 package task4_pizzas;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class PizzaTask {
@@ -32,7 +35,18 @@ public class PizzaTask {
      */
     public int sumPreparationTime(String... pizzaNames) {
         // TODO
-        return -1;
+
+        int counter = 0;
+
+        List<String> pizzarriba = new ArrayList<>();
+        Collections.addAll(pizzarriba,pizzaNames);
+
+        for (Pizza pizza : dataHandler.getPizzas()) {
+            if (pizzarriba.contains(pizza.getName())) {
+                counter += pizza.getTime();
+            }
+        }
+        return counter;
     }
 
     /**
@@ -40,7 +54,15 @@ public class PizzaTask {
      */
     public List<Pizza> findPizzasBySize(PizzaSize size) {
         // TODO
-        return null;
+
+        List<Pizza> pizzaList = new ArrayList<>();
+
+        for (Pizza pizza : dataHandler.getPizzas()) {
+            if (pizza.getSize() == size) {
+                pizzaList.add(pizza);
+            }
+        }
+        return pizzaList;
     }
 
     /**
@@ -52,7 +74,15 @@ public class PizzaTask {
      */
     public List<Pizza> findPizzasWithTopping(String topping) {
         // TODO
-        return null;
+
+        List<Pizza> pizzaList = new ArrayList<>();
+
+        for (Pizza pizza : dataHandler.getPizzas()) {
+            if (pizza.getToppings().contains(topping)) {
+                pizzaList.add(pizza);
+            }
+        }
+        return pizzaList;
     }
 
 }

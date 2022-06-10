@@ -1,7 +1,6 @@
 package task1_numbers;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class NumbersTask {
 
@@ -33,16 +32,25 @@ public class NumbersTask {
      * Add össze a fájlból beolvasott számokat!
      */
     public int sum() {
-        // TODO
-        return -1;
+        int sum = 0;
+
+        for (int numb : dataHandler.getNumbers()) {
+            sum += numb;
+        }
+        return sum;
     }
 
     /**
      * Mekkora a fájlból beolvasott számok átlaga? Számítsd ki!
      */
     public double avg() {
-        // TODO
-        return 0.0;
+        int sum = 0;
+
+        for (int numb : dataHandler.getNumbers()) {
+            sum += numb;
+        }
+
+        return (double) sum / dataHandler.getNumbers().size();
     }
 
     /**
@@ -50,8 +58,20 @@ public class NumbersTask {
      * Számold össze, és térj vissza a megoldással!
      */
     public int countDifferentDigits(int index) {
-        // TODO
-        return -1;
+
+        Set<Integer> ayy = new HashSet<>();
+        int ayyi;
+
+        if (dataHandler.getNumbers().get(index) < 0) {
+             ayyi = dataHandler.getNumbers().get(index) * -1;
+        } else ayyi = dataHandler.getNumbers().get(index);
+        String stringAyy = String.valueOf(ayyi);
+
+        for (int i = 0; i < stringAyy.length(); i++) {
+            ayy.add((int) stringAyy.charAt(i))     ;
+        }
+
+         return ayy.size();
     }
 
     /**
@@ -59,8 +79,24 @@ public class NumbersTask {
      * Számold össze, és térj vissza a megoldással!
      */
     public int countDigit(int digit) {
-        // TODO
-        return -1;
+
+        List<Character> ayyChar = new ArrayList<>();
+        String newting = String.valueOf(dataHandler.getNumbers());
+        String[] parts = newting.split(",");
+        int counter = 0;
+
+        for (int i = 0; i < parts.length; i++) {
+            for (int j = 0; j < parts[i].length(); j++) {
+                ayyChar.add(parts[i].charAt(j));
+            }
+        }
+
+        for (Character charsie : ayyChar) {
+            if (digit == Character.getNumericValue(charsie)) {
+                counter++;
+            }
+        }
+        return counter;
     }
 
     /**
@@ -68,8 +104,13 @@ public class NumbersTask {
      * Számold össze, és térj vissza a megoldással!
      */
     public Map<Integer, Integer> countAllDigits() {
-        // TODO
-        return null;
+
+        Map<Integer, Integer> numbers = new HashMap<>();
+
+        for (int i = 0; i < 10; i++) {
+            numbers.put(i,countDigit(i));
+        }
+        return numbers;
     }
 
 }

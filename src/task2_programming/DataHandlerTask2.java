@@ -1,5 +1,7 @@
 package task2_programming;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.*;
 
 /**
@@ -34,6 +36,22 @@ public class DataHandlerTask2 {
     public void loadData() {
         try {
             // TODO (ne felejtsd el, hogy a languages nincs inicializálva!)
+            BufferedReader reader = new BufferedReader(new FileReader("src/task2_programming/programming_languages.txt"));
+            String line;
+            languages = new HashMap<>();
+            List<String> programming = new ArrayList<>();
+            while ((line = reader.readLine()) != null) {
+
+                programming.add(line);
+            }
+            for (String sthing : programming) {
+                String[] parts = sthing.split(SEPARATOR);
+                if (!languages.containsKey(Integer.parseInt(parts[1]))) {
+                    languages.put(Integer.parseInt(parts[1]), new ArrayList<>());
+                }
+                List<String> subList = languages.get(Integer.parseInt(parts[1]));
+                subList.add(parts[0]);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
